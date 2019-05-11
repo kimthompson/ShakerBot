@@ -59,11 +59,6 @@ function getRoles(guild) {
       command: "treasure",
       name: "Treasure",
       id: guild.roles.find(r => r.name === "Treasure").id
-    },
-    {
-      command: null,
-      name: "Admin",
-      id: guild.roles.find(r => r.name === "Admin").id
     }
   ];
 }

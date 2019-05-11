@@ -36,6 +36,7 @@ bot.on("message", message => {
     case "treasure":
     case "journal":
     case "cactpot":
+      // Basic role addition/removal
       let role = roles.find(role => role.command === command);
 
       if (message.member.roles.has(role.id)) {
@@ -51,6 +52,7 @@ bot.on("message", message => {
     case "tankmain":
     case "healermain":
     case "dpsmain":
+      // Main role addition/removal
       let offRoles = ["tankmain", "healermain", "dpsmain"].filter(
         role => command !== role
       );
@@ -84,6 +86,7 @@ bot.on("message", message => {
       message.delete().catch(console.error);
       break;
     case "roles":
+      // Returns a list of the user's roles
       let roleList = "Here is the list of your current roles:\n";
       message.member.roles.forEach(function(role) {
         roleList = roleList.concat(`${role.name}\n`);
@@ -92,8 +95,8 @@ bot.on("message", message => {
       message.delete().catch(console.error);
       break;
     case "sleep":
-      // ADMIN ONLY
-      let adminId = roles.find(role => role.name === "Admin").id;
+      // *ADMIN ONLY* Gracefully shuts down the bot
+      let adminId = guild.roles.find(r => r.name === "Admin").id;
 
       if (message.member.roles.has(adminId)) {
         new Promise((resolve, reject) => {
