@@ -36,15 +36,16 @@ bot.on("message", message => {
     case "treasure":
     case "journal":
     case "cactpot":
-      let aRole = roles.find(role => role.command === command);
+      let role = roles.find(role => role.command === command);
 
-      if (message.member.roles.has(aRole)) {
-        message.member.removeRole(aRole.id).catch(console.error);
-        console.log(`Removing ${user.username} from ${aRole.name} role`);
+      if (message.member.roles.has(role.id)) {
+        message.member.removeRole(role.id);
+        console.log(`Removing ${user.username} from ${role.name} role`);
       } else {
-        message.member.addRole(aRole.id).catch(console.error);
-        console.log(`Adding ${user.username} to ${aRole.name} role.`);
+        message.member.addRole(role.id);
+        console.log(`Adding ${user.username} to ${role.name} role.`);
       }
+
       message.delete().catch(console.error);
       break;
     case "tankmain":
@@ -61,49 +62,44 @@ bot.on("message", message => {
       );
 
       if (message.member.roles.has(mainRole.id)) {
-        message.member.removeRole(mainRole.id).catch(console.error);
-        console.log(`Removing ${user.username} from ${mainRole.name} role.`);
-      } else if (message.member.roles.has(otherRole.id)) {
-        message.member.removeRole(otherRole.id).catch(console.error);
-        message.member.addRole(mainRole.id).catch(console.error);
+        message.member.removeRole(mainRole.id);
+
         console.log(
-          `Removed ${user.username} from ${otherRole.name} role, added to ${
-            mainRole.name
-          } role.`
-        );
-      } else if (message.member.roles.has(anotherRole.id)) {
-        message.member.removeRole(anotherRole.id).catch(console.error);
-        message.member.addRole(mainRole.id).catch(console.error);
-        console.log(
-          `Removed ${user.username} from ${anotherRole.name} role, added to ${
-            mainRole.name
-          } role.`
+          `${user.username}'s main role is no longer ${mainRole.name
+            .split(" ")
+            .shift()}`
         );
       } else {
-        message.member.addRole(mainRole.id).catch(console.error);
-        console.log(`Adding ${user.username} to ${mainRole.name} role.`);
+        message.member.addRole(mainRole.id);
+        message.member.removeRole(otherRole.id);
+        message.member.removeRole(anotherRole.id);
+
+        console.log(
+          `Setting ${user.username}'s main role to ${mainRole.name
+            .split(" ")
+            .shift()}`
+        );
       }
+
       message.delete().catch(console.error);
       break;
     case "roles":
-      var roleList = "Here is the list of your current roles:\n";
-      message.member.roles.forEach(function(role, roleID) {
+      let roleList = "Here is the list of your current roles:\n";
+      message.member.roles.forEach(function(role) {
         roleList = roleList.concat(`${role.name}\n`);
       });
       message.member.send(roleList).catch(console.error);
       message.delete().catch(console.error);
       break;
-    // ADMIN ONLY
     case "sleep":
-      if (
-        message.member.roles.has(guild.roles.find(r => r.name === "Admin").id)
-      ) {
-        guild.members
-          .find(u => u.id === config.creator)
-          .send(`Takin' a snooze!`)
-          .catch(console.error);
-        message.delete().catch(console.error);
-        setTimeout(function() {
+      // ADMIN ONLY
+      let adminId = roles.find(role => role.name === "Admin").id;
+
+      if (message.member.roles.has(adminId)) {
+        utils.alertAdmin(guild, config, "Takin' a snooze!");
+        message.delete();
+
+        setTimeout(() => {
           console.log("Naptime!");
           bot.destroy();
         }, 5000);
