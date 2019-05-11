@@ -96,13 +96,15 @@ bot.on("message", message => {
       let adminId = roles.find(role => role.name === "Admin").id;
 
       if (message.member.roles.has(adminId)) {
-        utils.alertAdmin(guild, config, "Takin' a snooze!");
-        message.delete();
-
-        setTimeout(() => {
+        new Promise((resolve, reject) => {
+          guild.members
+            .find(u => u.id === config.creator)
+            .send("Takin' a snooze!");
+          resolve();
+        }).then(() => {
           console.log("Naptime!");
           bot.destroy();
-        }, 5000);
+        });
       } else {
         guild.members
           .find(u => u.id === config.creator)

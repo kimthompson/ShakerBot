@@ -13,13 +13,6 @@ function shouldIgnore(msg, cfg) {
   }
 }
 
-function alertAdmin(guild, config, alert) {
-  guild.members
-    .find(u => u.id === config.creator)
-    .send(alert)
-    .catch(console.error);
-}
-
 function getRoles(guild) {
   return [
     {
@@ -91,7 +84,6 @@ const validCommands = [
 
 module.exports = {
   shouldIgnore,
-  alertAdmin,
   validCommands,
   getRoles
 };
