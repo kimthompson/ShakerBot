@@ -2,7 +2,7 @@
   "name": "shaker_bot",
   "version": "1.0.0",
   "description": "The Spice Rack's Discord Admin Bot",
-  "main": "bot.js",
+  "main": "src/bot.js",
   "authors": "[Kaien Tsurugi, Yomi Hagane]",
   "dependencies": {
     "bufferutil": "^4.0.1",
@@ -11,9 +11,12 @@
     "winston": "^3.2.1"
   },
   "scripts": {
-    "start": "node bot.js",
+    "start": "node src/bot.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "jest": "^24.8.0"
+  }
 }
