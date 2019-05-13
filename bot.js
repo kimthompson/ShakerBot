@@ -1,6 +1,7 @@
 const Discord = require("discord.js");
 const config = require("./config.json");
 const utils = require("./utils");
+const process = require("./process");
 
 const bot = new Discord.Client();
 
@@ -14,7 +15,16 @@ bot.on("ready", () => {
 });
 
 bot.on("message", message => {
-  if (utils.shouldIgnore(message, config)) return;
+  let isBot = message.author.bot;
+  let isBotChannel =
+    message.channel.id === (config.testchannel || config.botchannel);
+  let isCommand = message.content.startsWith(config.prefix);
+
+  if (isBot || !isBotChannel) return;
+  if (!isCommand) {
+    message.delete().catch(console.error);
+    return;
+  }
 
   let args = message.content
     .slice(config.prefix.length)
@@ -25,100 +35,10 @@ bot.on("message", message => {
 
   if (command in utils.validCommands) return;
 
-  const user = message.member.user;
   const guild = bot.guilds.get(config.guild);
   const roles = utils.getRoles(guild);
 
-  switch (command) {
-    case "tank":
-    case "healer":
-    case "dps":
-    case "treasure":
-    case "journal":
-    case "cactpot":
-      // Basic role addition/removal
-      let role = roles.find(role => role.command === command);
-
-      if (message.member.roles.has(role.id)) {
-        message.member.removeRole(role.id);
-        console.log(`Removing ${user.username} from ${role.name} role`);
-      } else {
-        message.member.addRole(role.id);
-        console.log(`Adding ${user.username} to ${role.name} role.`);
-      }
-
-      message.delete().catch(console.error);
-      break;
-    case "tankmain":
-    case "healermain":
-    case "dpsmain":
-      // Main role addition/removal
-      let offRoles = ["tankmain", "healermain", "dpsmain"].filter(
-        role => command !== role
-      );
-
-      let mainRole = roles.find(role => role.command === command);
-      let otherRole = roles.find(role => role.command === offRoles[0]);
-      let anotherRole = roles.find(
-        role => role.command === offRoles[offRoles.length - 1]
-      );
-
-      if (message.member.roles.has(mainRole.id)) {
-        message.member.removeRole(mainRole.id);
-
-        console.log(
-          `${user.username}'s main role is no longer ${mainRole.name
-            .split(" ")
-            .shift()}`
-        );
-      } else {
-        message.member.addRole(mainRole.id);
-        message.member.removeRole(otherRole.id);
-        message.member.removeRole(anotherRole.id);
-
-        console.log(
-          `Setting ${user.username}'s main role to ${mainRole.name
-            .split(" ")
-            .shift()}`
-        );
-      }
-
-      message.delete().catch(console.error);
-      break;
-    case "roles":
-      // Returns a list of the user's roles
-      let roleList = "Here is the list of your current roles:\n";
-      message.member.roles.forEach(function(role) {
-        roleList = roleList.concat(`${role.name}\n`);
-      });
-      message.member.send(roleList).catch(console.error);
-      message.delete().catch(console.error);
-      break;
-    case "sleep":
-      // *ADMIN ONLY* Gracefully shuts down the bot
-      let adminId = guild.roles.find(r => r.name === "Admin").id;
-
-      if (message.member.roles.has(adminId)) {
-        new Promise((resolve, reject) => {
-          guild.members
-            .find(u => u.id === config.creator)
-            .send("Takin' a snooze!");
-          resolve();
-        }).then(() => {
-          console.log("Naptime!");
-          bot.destroy();
-        });
-      } else {
-        guild.members
-          .find(u => u.id === config.creator)
-          .send(`${user.username} attempted to put me to sleep.`)
-          .catch(console.error);
-        message.delete().catch(console.error);
-      }
-      break;
-    default:
-      message.delete().catch(console.error);
-  }
+  process.command(command, message, roles, guild, bot);
 });
 
 bot.login(config.token);

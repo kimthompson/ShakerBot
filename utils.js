@@ -1,18 +1,3 @@
-function shouldIgnore(msg, cfg) {
-  let isBot = msg.author.bot;
-  let isBotChannel = msg.channel.id === (cfg.testchannel || cfg.botchannel);
-  let isCommand = msg.content.startsWith(cfg.prefix);
-
-  if (isBot || !isBotChannel) {
-    return true;
-  } else if (!isCommand) {
-    msg.delete().catch(console.error);
-    return true;
-  } else {
-    return false;
-  }
-}
-
 function getRoles(guild) {
   return [
     {
@@ -77,8 +62,20 @@ const validCommands = [
   "sleep"
 ];
 
+const basicCommands = [
+  "tank",
+  "healer",
+  "dps",
+  "treasure",
+  "journal",
+  "cactpot"
+];
+
+const mainCommands = ["tankmain", "healermain", "dpsmain"];
+
 module.exports = {
-  shouldIgnore,
+  getRoles,
   validCommands,
-  getRoles
+  basicCommands,
+  mainCommands
 };
