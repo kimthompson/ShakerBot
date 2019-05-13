@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
 const config = require("./config.json");
 const utils = require("./utils");
-const process = require("./process");
+const CommandProcessor = require("./CommandProcessor");
 
 const bot = new Discord.Client();
 
@@ -26,19 +26,20 @@ bot.on("message", message => {
     return;
   }
 
-  let args = message.content
+  const command = message.content
     .slice(config.prefix.length)
     .trim()
-    .split(/ +/g);
-
-  const command = args.shift().toLowerCase();
+    .split(/ +/g)
+    .shift()
+    .toLowerCase();
 
   if (command in utils.validCommands) return;
 
   const guild = bot.guilds.get(config.guild);
   const roles = utils.getRoles(guild);
 
-  process.command(command, message, roles, guild, bot);
+  const processor = new CommandProcessor(message, guild, roles, command, bot);
+  processor.runCommand();
 });
 
 bot.login(config.token);
