@@ -1,19 +1,22 @@
 {
   "name": "shaker_bot",
   "version": "1.0.0",
-  "description": "FC Discord Admin Bot",
-  "main": "bot.js",
-  "author": "Kaien Tsurugi",
+  "description": "The Spice Rack's Discord Admin Bot",
+  "main": "src/bot.js",
+  "authors": "[Kaien Tsurugi, Yomi Hagane]",
   "dependencies": {
     "bufferutil": "^4.0.1",
     "discord.js": "^11.4.2",
     "uws": "^100.0.1",
     "winston": "^3.2.1"
   },
-  "devDependencies": {},
   "scripts": {
+    "start": "node src/bot.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "license": "ISC"
+  "license": "MIT",
+  "devDependencies": {
+    "jest": "^24.8.0"
+  }
 }
