@@ -75,7 +75,7 @@ class CommandProcessor {
     let adminId = this.guild.roles.find(r => r.name === "Admin").id;
 
     if (this.message.member.roles.has(adminId)) {
-      new Promise((resolve, reject) => {
+      new Promise(resolve => {
         this.guild.members
           .find(u => u.id === config.creator)
           .send("Takin' a snooze!");
