@@ -78,11 +78,13 @@ class CommandProcessor {
       new Promise(resolve => {
         this.guild.members
           .find(u => u.id === config.creator)
-          .send("Takin' a snooze!");
+          .send("Takin' a snooze!")
+          .catch(console.error);
         resolve();
       }).then(() => {
         console.log("Naptime!");
         this.bot.destroy();
+        process.exit();
       });
     } else {
       this.guild.members
@@ -103,6 +105,7 @@ class CommandProcessor {
     } else if (this.command === "role") {
       this.roleCommand();
     } else if (this.command === "sleep") {
+      console.log("sleep command run");
       this.sleepCommand();
     }
   }
