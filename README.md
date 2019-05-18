@@ -10,6 +10,6 @@ You'll need to make sure you've got node and npm installed, then run:
  
 Then to run the bot, you'll need to run
 
-`node bot.js`
+`npm run start`
 
 I have access to the !sleep command, and I haven't made a README yet, so if you have any questions, please let me know.
