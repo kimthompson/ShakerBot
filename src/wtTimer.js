@@ -1,4 +1,4 @@
-/* A timer to remind players of Wonderous Tales */
+/* A timer to remind players of Wondrous Tails */
 
 const Discord = require("discord.js");
 const config = require("../config.json");
