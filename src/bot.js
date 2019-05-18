@@ -41,7 +41,6 @@ bot.on("message", message => {
   if (command in utils.validCommands) return;
 
   const guild = bot.guilds.get(config.guild);
-
   const roles = utils.getRoles(guild);
 
   const processor = new CommandProcessor(message, guild, roles, command, bot);

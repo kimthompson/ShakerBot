@@ -105,7 +105,6 @@ class CommandProcessor {
     } else if (this.command === "role") {
       this.roleCommand();
     } else if (this.command === "sleep") {
-      console.log("sleep command run");
       this.sleepCommand();
     }
   }
