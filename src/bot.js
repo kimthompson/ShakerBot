@@ -1,6 +1,7 @@
 const Discord = require("discord.js");
 const config = require("../config.json");
 const utils = require("./utils");
+const timers = require("./timers");
 const CommandProcessor = require("./CommandProcessor");
 
 const bot = new Discord.Client();
@@ -12,6 +13,10 @@ bot.on("ready", () => {
     .catch(console.error);
   bot.user.setActivity("FC chat", { type: "LISTENING" });
   console.log("I am awake and ready to work!");
+
+  const guild = bot.guilds.get(config.guild);
+
+  timers.startTimers(guild);
 });
 
 bot.on("message", message => {
