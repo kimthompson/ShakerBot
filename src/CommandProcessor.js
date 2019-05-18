@@ -83,6 +83,7 @@ class CommandProcessor {
         resolve();
       }).then(() => {
         console.log("Naptime!");
+        this.message.delete().catch(console.error);
         this.bot.destroy();
         process.exit();
       });
@@ -102,7 +103,7 @@ class CommandProcessor {
       this.basicCommand();
     } else if (utils.mainCommands.includes(this.command)) {
       this.mainCommand();
-    } else if (this.command === "role") {
+    } else if (this.command === "roles") {
       this.roleCommand();
     } else if (this.command === "sleep") {
       this.sleepCommand();

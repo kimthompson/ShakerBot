@@ -22,10 +22,11 @@ bot.on("ready", () => {
 bot.on("message", message => {
   let isBot = message.author.bot;
   let isBotChannel =
-    message.channel.id === (config.testchannel || config.botchannel);
+    message.channel.id === config.testchannel || message.channel.id === config.botchannel;
   let isCommand = message.content.startsWith(config.prefix);
 
   if (isBot || !isBotChannel) return;
+
   if (!isCommand) {
     message.delete().catch(console.error);
     return;
@@ -38,13 +39,19 @@ bot.on("message", message => {
     .shift()
     .toLowerCase();
 
-  if (command in utils.validCommands) return;
+  if (!utils.validCommands.includes(command)) {
+    message.delete().catch(console.error);
+    return;
+  }
 
   const guild = bot.guilds.get(config.guild);
   const roles = utils.getRoles(guild);
 
   const processor = new CommandProcessor(message, guild, roles, command, bot);
   processor.runCommand();
+
+  // message.delete().catch(console.error);
+  return;
 });
 
 bot.login(config.token);
