@@ -1,5 +1,9 @@
 # ShakerBot
 
+## Warning
+
+Any adjustments made to the master branch will be deployed. Please keep this in mind during development and develop on your own branches, and attempt to merge them into `staging` before trying them on `master`.
+
 ## Installation and Boot
 
 Make sure you have installed node, npm and git. Once you've cloned this repo, run the command `npm i` to install all the required packages, then run `npm run start` to start the server in the background. For active development, run the command `npm run dev` to see the full terminal readout.
