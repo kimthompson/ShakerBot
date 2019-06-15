@@ -74,7 +74,7 @@ const basicCommands = [
 const mainCommands = ["tankmain", "healermain", "dpsmain"];
 
 module.exports = {
-  getRoles,
+  roles,
   validCommands,
   basicCommands,
   mainCommands
