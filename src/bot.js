@@ -46,10 +46,12 @@ bot.on("message", message => {
   }
 
   const guild = bot.guilds.get(config.guild);
+  const roles = utils.getRoles(guild);
 
-  const processor = new CommandProcessor(message, guild, command, bot);
+  const processor = new CommandProcessor(message, guild, roles, command, bot);
   processor.runCommand();
 
+  // message.delete().catch(console.error);
   return;
 });
 

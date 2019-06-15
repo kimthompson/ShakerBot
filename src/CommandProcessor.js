@@ -2,16 +2,17 @@ const config = require("../config.json");
 const utils = require("./utils");
 
 class CommandProcessor {
-  constructor(message, guild, command, bot) {
+  constructor(message, guild, roles, command, bot) {
     this.message = message;
     this.guild = guild;
+    this.roles = roles;
     this.command = command;
     this.bot = bot;
   }
 
   basicCommand() {
     // Basic role addition/removal
-    let role = utils.roles.find(role => role.command === this.command);
+    let role = this.roles.find(role => role.command === this.command);
 
     if (this.message.member.roles.has(role.id)) {
       this.message.member.removeRole(role.id);
@@ -32,9 +33,9 @@ class CommandProcessor {
     // Main role addition/removal
     let offRoles = utils.mainCommands.filter(role => this.command !== role);
 
-    let mainRole = utils.roles.find(role => role.command === this.command);
-    let otherRole = utils.roles.find(role => role.command === offRoles[0]);
-    let anotherRole = utils.roles.find(
+    let mainRole = this.roles.find(role => role.command === this.command);
+    let otherRole = this.roles.find(role => role.command === offRoles[0]);
+    let anotherRole = this.roles.find(
       role => role.command === offRoles[offRoles.length - 1]
     );
 
