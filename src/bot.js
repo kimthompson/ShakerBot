@@ -22,7 +22,8 @@ bot.on("ready", () => {
 bot.on("message", message => {
   let isBot = message.author.bot;
   let isBotChannel =
-    message.channel.id === config.testchannel || message.channel.id === config.botchannel;
+    message.channel.id === config.testchannel ||
+    message.channel.id === config.botchannel;
   let isCommand = message.content.startsWith(config.prefix);
 
   if (isBot || !isBotChannel) return;
@@ -45,12 +46,10 @@ bot.on("message", message => {
   }
 
   const guild = bot.guilds.get(config.guild);
-  const roles = utils.getRoles(guild);
 
-  const processor = new CommandProcessor(message, guild, roles, command, bot);
+  const processor = new CommandProcessor(message, guild, command, bot);
   processor.runCommand();
 
-  // message.delete().catch(console.error);
   return;
 });
 
