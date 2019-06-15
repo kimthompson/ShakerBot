@@ -1,52 +1,52 @@
-function getRoles(guild) {
-  return [
-    {
-      command: "tank",
-      name: "Tank",
-      id: guild.roles.find(r => r.name === "Tank").id
-    },
-    {
-      command: "healer",
-      name: "Healer",
-      id: guild.roles.find(r => r.name === "Healer").id
-    },
-    {
-      command: "dps",
-      name: "DPS",
-      id: guild.roles.find(r => r.name === "DPS").id
-    },
-    {
-      command: "tankmain",
-      name: "Tank Main",
-      id: guild.roles.find(r => r.name === "Tank Main").id
-    },
-    {
-      command: "healermain",
-      name: "Healer Main",
-      id: guild.roles.find(r => r.name === "Healer Main").id
-    },
-    {
-      command: "dpsmain",
-      name: "DPS Main",
-      id: guild.roles.find(r => r.name === "DPS Main").id
-    },
-    {
-      command: "journal",
-      name: "Journal",
-      id: guild.roles.find(r => r.name === "Journal").id
-    },
-    {
-      command: "cactpot",
-      name: "Cactpot",
-      id: guild.roles.find(r => r.name === "Cactpot").id
-    },
-    {
-      command: "treasure",
-      name: "Treasure",
-      id: guild.roles.find(r => r.name === "Treasure").id
-    }
-  ];
-}
+// TODO: Just find the number codes of these and save those directly for speed
+
+const roles = [
+  {
+    command: "tank",
+    name: "Tank",
+    id: "571447943673020416"
+  },
+  {
+    command: "healer",
+    name: "Healer",
+    id: "571448509685825536"
+  },
+  {
+    command: "dps",
+    name: "DPS",
+    id: "571449972340555776"
+  },
+  {
+    command: "tankmain",
+    name: "Tank Main",
+    id: "571453467261009978"
+  },
+  {
+    command: "healermain",
+    name: "Healer Main",
+    id: "571453596411887617"
+  },
+  {
+    command: "dpsmain",
+    name: "DPS Main",
+    id: "571453677965934628"
+  },
+  {
+    command: "journal",
+    name: "Journal",
+    id: "572123320904843276"
+  },
+  {
+    command: "cactpot",
+    name: "Cactpot",
+    id: "572123648282984470"
+  },
+  {
+    command: "treasure",
+    name: "Treasure",
+    id: "572215317569339413"
+  }
+];
 
 const validCommands = [
   "tank",
