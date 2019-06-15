@@ -5,7 +5,6 @@ class CommandProcessor {
   constructor(message, guild, command, bot) {
     this.message = message;
     this.guild = guild;
-    utils.roles = roles;
     this.command = command;
     this.bot = bot;
   }
