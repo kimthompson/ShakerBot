@@ -34,7 +34,7 @@ function startTimers(guild) {
           .send(
             `Hello, ${
               member.user.username
-            }! The Jumbo Cactpot drawing is in an hour. Make sure you have your numbers ready!`
+            }! The Jumbo Cactpot drawing is in five minutes! See you at the Gold Saucer!`
           )
           .catch(console.error);
         resolve();
