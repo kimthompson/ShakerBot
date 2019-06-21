@@ -2,6 +2,7 @@ const config = require("../config.json");
 const utils = require("./utils");
 const { format } = require("date-fns");
 const subHours = require("date-fns/sub_hours");
+const addHours = require("date-fns/add_hours");
 
 // the server needs this
 const TIMEZONE_OFFSET = 1;
@@ -104,13 +105,13 @@ class CommandProcessor {
   }
 
   timeCommand() {
-    let now = subHours(new Date(), TIMEZONE_OFFSET);
+    let now = addHours(new Date(), TIMEZONE_OFFSET);
     let testChannelId = "571461836592119809";
     let channel = this.guild.channels.get(testChannelId);
 
-    console.log(`Test timer ran at ${format(now, "H:mm on dddd")}.`);
+    console.log(`Current time is: ${format(now, "H:mm on dddd")}.`);
 
-    channel.send(`Test timer ran at ${format(now, "H:mm on dddd")}.`);
+    channel.send(`Current time is: ${format(now, "H:mm on dddd")}.`);
 
     this.message.delete().catch(console.error);
   }
