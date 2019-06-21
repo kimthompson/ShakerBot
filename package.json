@@ -18,6 +18,7 @@
     "start": "pm2 start src/bot.js",
     "stop": "pm2 stop bot",
     "list": "pm2 list",
+    "logs": "pm2 logs",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

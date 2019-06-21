@@ -51,7 +51,6 @@ bot.on("message", message => {
   const processor = new CommandProcessor(message, guild, roles, command, bot);
   processor.runCommand();
 
-  // message.delete().catch(console.error);
   return;
 });
 

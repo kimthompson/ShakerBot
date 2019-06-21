@@ -1,5 +1,10 @@
 const config = require("../config.json");
 const utils = require("./utils");
+const { format } = require("date-fns");
+const subHours = require("date-fns/sub_hours");
+
+// the server needs this
+const TIMEZONE_OFFSET = 1;
 
 class CommandProcessor {
   constructor(message, guild, roles, command, bot) {
@@ -99,14 +104,15 @@ class CommandProcessor {
   }
 
   timeCommand() {
-    // Returns user's roles in a chat to them
-    // let roleList = "Here is the list of your current roles:\n";
-    // this.message.member.roles.forEach(function(role) {
-    //   roleList = roleList.concat(`${role.name}\n`);
-    // });
-    // this.message.member.send(roleList).catch(console.error);
-    // this.message.delete().catch(console.error);
-    // shell.exec('date')
+    let now = subHours(new Date(), TIMEZONE_OFFSET);
+    let testChannelId = "571461836592119809";
+    let channel = this.guild.channels.get(testChannelId);
+
+    console.log(`Test timer ran at ${format(now, "H:mm on dddd")}.`);
+
+    channel.send(`Test timer ran at ${format(now, "H:mm on dddd")}.`);
+
+    this.message.delete().catch(console.error);
   }
 
   runCommand() {
