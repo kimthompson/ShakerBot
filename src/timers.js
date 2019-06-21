@@ -121,6 +121,7 @@ function fashionTimer(guild) {
 }
 
 function testTimer(guild) {
+  // runs every minute if activated below: used for troubleshooting the timers, along with the `!time` command
   let testRule = new schedule.RecurrenceRule();
 
   schedule.scheduleJob(testRule, function() {
@@ -141,7 +142,7 @@ function startTimers(guild) {
   urgentCactpotTimer(guild);
   tailsTimer(guild);
   fashionTimer(guild);
-  testTimer(guild);
+  // testTimer(guild);
 }
 
 module.exports = {
