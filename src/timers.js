@@ -10,7 +10,7 @@ const TIMEZONE_OFFSET = 1;
 function cactpotTimer(guild) {
   let cactpotRule = new schedule.RecurrenceRule();
   cactpotRule.dayOfWeek = [6];
-  cactpotRule.hour = 20 + TIMEZONE_OFFSET;
+  cactpotRule.hour = 20 + TIMEZONE_OFFSET - 2;
   cactpotRule.minute = 0;
 
   schedule.scheduleJob(cactpotRule, function() {
@@ -37,7 +37,7 @@ function cactpotTimer(guild) {
 function urgentCactpotTimer(guild) {
   let urgentCactpotRule = new schedule.RecurrenceRule();
   urgentCactpotRule.dayOfWeek = [6];
-  urgentCactpotRule.hour = 20 + TIMEZONE_OFFSET;
+  urgentCactpotRule.hour = 20 + TIMEZONE_OFFSET - 2;
   urgentCactpotRule.minute = 55;
 
   schedule.scheduleJob(urgentCactpotRule, function() {
@@ -67,7 +67,7 @@ function urgentCactpotTimer(guild) {
 function tailsTimer(guild) {
   let tailsRule = new schedule.RecurrenceRule();
   tailsRule.dayOfWeek = [2, 5];
-  tailsRule.hour = 18 + TIMEZONE_OFFSET;
+  tailsRule.hour = 18 + TIMEZONE_OFFSET - 2;
   tailsRule.minute = 0;
 
   schedule.scheduleJob(tailsRule, function() {
@@ -97,7 +97,7 @@ function tailsTimer(guild) {
 function fashionTimer(guild) {
   let fashionRule = new schedule.RecurrenceRule();
   fashionRule.dayOfWeek = [5];
-  fashionRule.hour = 10 + TIMEZONE_OFFSET;
+  fashionRule.hour = 10 + TIMEZONE_OFFSET - 2;
   fashionRule.minute = 0;
 
   schedule.scheduleJob(fashionRule, async function() {
