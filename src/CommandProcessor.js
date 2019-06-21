@@ -98,6 +98,17 @@ class CommandProcessor {
     }
   }
 
+  timeCommand() {
+    // Returns user's roles in a chat to them
+    // let roleList = "Here is the list of your current roles:\n";
+    // this.message.member.roles.forEach(function(role) {
+    //   roleList = roleList.concat(`${role.name}\n`);
+    // });
+    // this.message.member.send(roleList).catch(console.error);
+    // this.message.delete().catch(console.error);
+    // shell.exec('date')
+  }
+
   runCommand() {
     if (utils.basicCommands.includes(this.command)) {
       this.basicCommand();
@@ -107,6 +118,8 @@ class CommandProcessor {
       this.roleCommand();
     } else if (this.command === "sleep") {
       this.sleepCommand();
+    } else if (this.command === "time") {
+      this.timeCommand();
     }
   }
 }

@@ -55,4 +55,26 @@ bot.on("message", message => {
   return;
 });
 
+bot.on("disconnect", function(event) {
+  console.log(
+    `The WebSocket has closed and Shaker will no longer attempt to reconnect`
+  );
+});
+
+bot.on("reconnecting", function() {
+  console.log(`Shaker is trying to reconnect to the WebSocket`);
+});
+
+bot.on("resume", function(replayed) {
+  console.log(`Shaker resumed the WebSocket: ${replayed}`);
+});
+
+bot.on("error", function(error) {
+  console.error(`Shaker's WebSocket encountered a connection error: ${error}`);
+});
+
+bot.on("warn", function(info) {
+  console.log(`warn: ${info}`);
+});
+
 bot.login(config.token);
