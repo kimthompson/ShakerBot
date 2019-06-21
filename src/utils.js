@@ -61,7 +61,8 @@ const validCommands = [
   "healermain",
   "dpsmain",
   "roles",
-  "sleep"
+  "sleep",
+  "time"
 ];
 
 const basicCommands = [
