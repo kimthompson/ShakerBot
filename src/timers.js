@@ -143,7 +143,7 @@ function startTimers(guild) {
   urgentCactpotTimer(guild);
   tailsTimer(guild);
   fashionTimer(guild);
-  testTimer(guild);
+  // testTimer(guild);
 }
 
 module.exports = {
