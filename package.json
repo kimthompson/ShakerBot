@@ -15,10 +15,8 @@
   },
   "scripts": {
     "dev": "node src/bot.js",
-    "start": "pm2 start src/bot.js",
-    "stop": "pm2 stop bot",
-    "list": "pm2 list",
-    "logs": "pm2 logs",
+    "start": "pm2 start src/bot.js -i 1",
+    "tree": "tree -I node_modules",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
