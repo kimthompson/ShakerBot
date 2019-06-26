@@ -5,16 +5,17 @@ const subHours = require("date-fns/sub_hours");
 const addHours = require("date-fns/add_hours");
 
 // the server needs this
-const TIMEZONE_OFFSET = 1;
+const FNS_OFFSET = 1;
+const TIMER_OFFSET = -1;
 
 function cactpotTimer(guild) {
   let cactpotRule = new schedule.RecurrenceRule();
   cactpotRule.dayOfWeek = [6];
-  cactpotRule.hour = 20 + TIMEZONE_OFFSET - 2;
+  cactpotRule.hour = 20 + TIMER_OFFSET;
   cactpotRule.minute = 0;
 
   schedule.scheduleJob(cactpotRule, function() {
-    let now = addHours(new Date(), TIMEZONE_OFFSET);
+    let now = addHours(new Date(), FNS_OFFSET);
     console.log(`Cactpot reminder ran at ${format(now, "H:mm on dddd")}.`);
     const role = guild.roles.find(r => r.name === "Cactpot");
     role.members.forEach(member => {
@@ -37,11 +38,11 @@ function cactpotTimer(guild) {
 function urgentCactpotTimer(guild) {
   let urgentCactpotRule = new schedule.RecurrenceRule();
   urgentCactpotRule.dayOfWeek = [6];
-  urgentCactpotRule.hour = 20 + TIMEZONE_OFFSET - 2;
+  urgentCactpotRule.hour = 20 + TIMER_OFFSET;
   urgentCactpotRule.minute = 55;
 
   schedule.scheduleJob(urgentCactpotRule, function() {
-    let now = addHours(new Date(), TIMEZONE_OFFSET);
+    let now = addHours(new Date(), FNS_OFFSET);
     console.log(
       `Urgent Cactpot reminder ran at ${format(now, "H:mm on dddd")}.`
     );
@@ -67,11 +68,11 @@ function urgentCactpotTimer(guild) {
 function tailsTimer(guild) {
   let tailsRule = new schedule.RecurrenceRule();
   tailsRule.dayOfWeek = [2, 5];
-  tailsRule.hour = 18 + TIMEZONE_OFFSET - 2;
+  tailsRule.hour = 18 + TIMER_OFFSET;
   tailsRule.minute = 0;
 
   schedule.scheduleJob(tailsRule, function() {
-    let now = addHours(new Date(), TIMEZONE_OFFSET);
+    let now = addHours(new Date(), FNS_OFFSET);
     console.log(
       `Wondrous Tails reminder ran at ${format(now, "H:mm on dddd")}.`
     );
@@ -97,11 +98,11 @@ function tailsTimer(guild) {
 function fashionTimer(guild) {
   let fashionRule = new schedule.RecurrenceRule();
   fashionRule.dayOfWeek = [5];
-  fashionRule.hour = 10 + TIMEZONE_OFFSET - 2;
+  fashionRule.hour = 10 + TIMER_OFFSET;
   fashionRule.minute = 0;
 
   schedule.scheduleJob(fashionRule, async function() {
-    let now = addHours(new Date(), TIMEZONE_OFFSET);
+    let now = addHours(new Date(), FNS_OFFSET);
     console.log(
       `Fashion Report reminder ran at ${format(now, "H:mm on dddd")}.`
     );
@@ -118,21 +119,6 @@ function fashionTimer(guild) {
     channel.send(
       `Happy Friday! You're all looking great today! If you'd like to cash in your fashion for some MGP, head over to the Gold Saucer and participate in the Fashion Report this weekend --> ${reportLink}`
     );
-  });
-}
-
-function testTimer(guild) {
-  // runs every minute if activated below: used for troubleshooting the timers, along with the `!time` command
-  let testRule = new schedule.RecurrenceRule();
-
-  schedule.scheduleJob(testRule, function() {
-    let now = addHours(new Date(), TIMEZONE_OFFSET);
-    let testChannelId = "571461836592119809";
-    let channel = guild.channels.get(testChannelId);
-
-    console.log(`Test timer ran at ${format(now, "H:mm on dddd")}.`);
-
-    channel.send(`Test timer ran at ${format(now, "H:mm on dddd")}.`);
   });
 }
 
