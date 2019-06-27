@@ -46,6 +46,10 @@ function getRoles() {
       command: "treasure",
       name: "Treasure",
       id: "572215317569339413"
+    },
+    { command: "spoilers",
+      name: "Spoilerbringers",
+      id: "593576716899713034"
     }
   ];
 }
@@ -62,6 +66,7 @@ const validCommands = [
   "dpsmain",
   "roles",
   "sleep",
+  "spoilers",
   "time"
 ];
 
@@ -71,7 +76,8 @@ const basicCommands = [
   "dps",
   "treasure",
   "journal",
-  "cactpot"
+  "cactpot",
+  "spoilers"
 ];
 
 const mainCommands = ["tankmain", "healermain", "dpsmain"];
